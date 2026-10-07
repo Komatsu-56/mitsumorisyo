@@ -77,6 +77,9 @@ export default function App() {
     setIsGeneratingPdf(true);
     setPdfProgressText('A4印刷用レイアウトを準備中...');
 
+    // Wait a brief moment to allow React to render the dedicated PDF container
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
     // Collect element IDs (prefer dedicated unscaled pdf- container for pristine resolution)
     const elementIds: string[] = [];
     if (document.getElementById('pdf-estimate-page-1')) {
@@ -126,7 +129,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-200/80 font-sans text-slate-900 flex flex-col selection:bg-slate-800 selection:text-white pb-16 relative w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen bg-slate-200 font-sans text-slate-900 flex flex-col selection:bg-slate-800 selection:text-white pb-16 relative w-full max-w-full overflow-x-hidden">
       {/* 1. Single Consolidated Top Navigation (No overlapping bars) */}
       <TopNav
         viewMode={viewMode}
@@ -318,17 +321,17 @@ export default function App() {
         )}
       </main>
 
-      {/* 4. Always-Rendered Unscaled Container for High-Definition PDF Generation */}
+      {/* 4. Dedicated Unscaled Container for High-Definition PDF Generation (Hidden unless generating) */}
       <div
         id="pdf-export-container"
         aria-hidden="true"
         className="no-print"
         style={{
+          display: isGeneratingPdf ? 'block' : 'none',
           position: 'fixed',
           top: 0,
           left: 0,
           width: '820px',
-          opacity: 1,
           backgroundColor: '#ffffff',
           pointerEvents: 'none',
           zIndex: -9999,
