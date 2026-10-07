@@ -80,24 +80,24 @@ export const SampleSheet2: React.FC<SampleSheet2Props> = ({
               <div className="border-2 border-black mt-3">
                 <table className="w-full border-collapse">
                   <thead>
-                    <tr className="border-b-2 border-black text-center font-medium bg-gray-50/50">
+                    <tr className="border-b-2 border-black text-center font-medium">
                       <th className="border-r border-black py-1.5 w-12 shrink-0 whitespace-nowrap text-center">項目</th>
-                      <th className="border-r border-black py-1.5 px-3 min-w-[260px] text-center whitespace-nowrap">件　　　　　　名</th>
-                      <th className="border-r border-black py-1.5 w-20 shrink-0 whitespace-nowrap text-center">数　量</th>
-                      <th className="border-r border-black py-1.5 w-24 shrink-0 whitespace-nowrap text-center">単価（円）</th>
-                      <th className="py-1.5 w-28 shrink-0 whitespace-nowrap text-center">金額（円）</th>
+                      <th className="border-l border-black border-r border-black py-1.5 px-3 min-w-[260px] text-center whitespace-nowrap">件　　　　　　名</th>
+                      <th className="border-l border-black border-r border-black py-1.5 w-20 shrink-0 whitespace-nowrap text-center">数　量</th>
+                      <th className="border-l border-black border-r border-black py-1.5 w-24 shrink-0 whitespace-nowrap text-center">単価（円）</th>
+                      <th className="border-l border-black py-1.5 w-28 shrink-0 whitespace-nowrap text-center">金額（円）</th>
                     </tr>
                   </thead>
                   <tbody>
                     {/* Top subheader indicator */}
-                    <tr className="border-b border-black/30 bg-slate-50/30">
+                    <tr className="border-b border-black/30">
                       <td className="border-r border-black py-1"></td>
-                      <td className="border-r border-black py-1 px-3 font-semibold text-gray-800">
+                      <td className="border-l border-black border-r border-black py-1 px-3 font-semibold text-gray-800">
                         ({header?.projectCategory ?? '本案件内訳'}{header?.projectSubject ? ` : ${header.projectSubject}` : ''})
                       </td>
-                      <td className="border-r border-black py-1"></td>
-                      <td className="border-r border-black py-1"></td>
-                      <td className="py-1"></td>
+                      <td className="border-l border-black border-r border-black py-1"></td>
+                      <td className="border-l border-black border-r border-black py-1"></td>
+                      <td className="border-l border-black py-1"></td>
                     </tr>
 
                     {/* Items on this page */}
@@ -127,7 +127,7 @@ export const SampleSheet2: React.FC<SampleSheet2Props> = ({
                       return (
                         <React.Fragment key={item.id}>
                           {/* Item Title Row */}
-                          <tr className="border-t border-black bg-slate-50/50">
+                          <tr className="border-t border-black">
                             {/* Item Number */}
                             <td
                               rowSpan={itemRowSpan}
@@ -137,38 +137,38 @@ export const SampleSheet2: React.FC<SampleSheet2Props> = ({
                             </td>
 
                             {/* Title */}
-                            <td className="border-r border-black pt-2 pb-1 px-3 font-bold text-xs text-slate-900 break-words">
+                            <td className="border-l border-black border-r border-black pt-2 pb-1 px-3 font-bold text-xs text-slate-900 break-words">
                               {item.title}
                             </td>
-                            <td className="border-r border-black"></td>
-                            <td className="border-r border-black"></td>
-                            <td></td>
+                            <td className="border-l border-black border-r border-black"></td>
+                            <td className="border-l border-black border-r border-black"></td>
+                            <td className="border-l border-black"></td>
                           </tr>
 
                           {/* 1. 材料費: 見出し行（金額は各品名側で計上されるため空欄） */}
-                          <tr className="border-t border-dotted border-black/20 bg-slate-50/30">
-                            <td className="border-r border-black py-1 px-3">
+                          <tr className="border-t border-dotted border-black/20">
+                            <td className="border-l border-black border-r border-black py-1 px-3">
                               <div className="text-gray-900 font-medium">・材料費</div>
                             </td>
-                            <td className="border-r border-black py-1"></td>
-                            <td className="border-r border-black py-1"></td>
-                            <td className="py-1"></td>
+                            <td className="border-l border-black border-r border-black py-1"></td>
+                            <td className="border-l border-black border-r border-black py-1"></td>
+                            <td className="border-l border-black py-1"></td>
                           </tr>
                           {effectiveMats.map((mat, mIdx) => (
-                            <tr key={mat.id || mIdx} className="border-t border-dotted border-black/15 bg-white">
-                              <td className="border-r border-black py-0.5 px-3">
+                            <tr key={mat.id || mIdx} className="border-t border-dotted border-black/15">
+                              <td className="border-l border-black border-r border-black py-0.5 px-3">
                                 <div className="pl-4 text-[10px] text-gray-800 leading-snug flex items-center">
                                   <span className="text-gray-400 mr-1 text-[9px] shrink-0">└</span>
                                   <span className="break-words">{mat.name}</span>
                                 </div>
                               </td>
-                              <td className="border-r border-black py-0.5 text-center font-mono text-[10px] text-gray-700">
+                              <td className="border-l border-black border-r border-black py-0.5 text-center font-mono text-[10px] text-gray-700">
                                 {mat.quantity} {mat.unit || '式'}
                               </td>
-                              <td className="border-r border-black py-0.5 text-right font-mono pr-2 text-[10px] text-gray-600">
+                              <td className="border-l border-black border-r border-black py-0.5 text-right font-mono pr-2 text-[10px] text-gray-600">
                                 {mat.unitPrice ? formatNumber(mat.unitPrice) : ''}
                               </td>
-                              <td className="py-0.5 text-right font-mono pr-2 font-medium text-[10px] text-gray-800">
+                              <td className="border-l border-black py-0.5 text-right font-mono pr-2 font-medium text-[10px] text-gray-800">
                                 {formatNumber(mat.amount)}
                               </td>
                             </tr>
@@ -176,56 +176,56 @@ export const SampleSheet2: React.FC<SampleSheet2Props> = ({
 
                           {/* 2. 取替調整費 */}
                           <tr className="border-t border-dotted border-black/20">
-                            <td className="border-r border-black py-1 px-3 text-gray-900 font-medium">
+                            <td className="border-l border-black border-r border-black py-1 px-3 text-gray-900 font-medium">
                               ・取替調整費
                             </td>
-                            <td className="border-r border-black py-1 text-center font-mono">
+                            <td className="border-l border-black border-r border-black py-1 text-center font-mono">
                               1 式
                             </td>
-                            <td className="border-r border-black py-1"></td>
-                            <td className="py-1 text-right font-mono pr-2 font-medium">
+                            <td className="border-l border-black border-r border-black py-1"></td>
+                            <td className="border-l border-black py-1 text-right font-mono pr-2 font-medium">
                               {formatNumber(b.replacementLaborAmount)}
                             </td>
                           </tr>
 
                           {/* 3. 運搬交通費 */}
                           <tr className="border-t border-dotted border-black/20">
-                            <td className="border-r border-black py-1 px-3 text-gray-900 font-medium">
+                            <td className="border-l border-black border-r border-black py-1 px-3 text-gray-900 font-medium">
                               ・運搬交通費
                             </td>
-                            <td className="border-r border-black py-1 text-center font-mono">
+                            <td className="border-l border-black border-r border-black py-1 text-center font-mono">
                               1 式
                             </td>
-                            <td className="border-r border-black py-1 text-right font-mono pr-2 text-gray-600">
+                            <td className="border-l border-black border-r border-black py-1 text-right font-mono pr-2 text-gray-600">
                               {formatNumber(b.transportAmount)}
                             </td>
-                            <td className="py-1 text-right font-mono pr-2 font-medium">
+                            <td className="border-l border-black py-1 text-right font-mono pr-2 font-medium">
                               {formatNumber(b.transportAmount)}
                             </td>
                           </tr>
 
                           {/* 4. 諸経費 */}
                           <tr className="border-t border-dotted border-black/20">
-                            <td className="border-r border-black py-1 px-3 text-gray-900 font-medium">
+                            <td className="border-l border-black border-r border-black py-1 px-3 text-gray-900 font-medium">
                               ・諸経費
                             </td>
-                            <td className="border-r border-black py-1 text-center font-mono">
+                            <td className="border-l border-black border-r border-black py-1 text-center font-mono">
                               1 式
                             </td>
-                            <td className="border-r border-black py-1"></td>
-                            <td className="py-1 text-right font-mono pr-2 font-medium">
+                            <td className="border-l border-black border-r border-black py-1"></td>
+                            <td className="border-l border-black py-1 text-right font-mono pr-2 font-medium">
                               {formatNumber(b.overheadAmount)}
                             </td>
                           </tr>
 
-                          {/* Subtotal 計 for this Item: 諸経費下の細い横棒・項目間の太い横棒を削除 */}
-                          <tr className="border-b border-black bg-gray-50/70">
-                            <td className="border-r border-black py-1"></td>
-                            <td className="border-r border-black py-1"></td>
-                            <td className="border-r border-black py-1 text-center font-bold">
+                          {/* Subtotal 計 for this Item */}
+                          <tr className="border-b border-black">
+                            <td className="border-l border-black border-r border-black py-1"></td>
+                            <td className="border-l border-black border-r border-black py-1"></td>
+                            <td className="border-l border-black border-r border-black py-1 text-center font-bold">
                               計
                             </td>
-                            <td className="py-1 text-right font-mono pr-2 font-bold text-xs">
+                            <td className="border-l border-black py-1 text-right font-mono pr-2 font-bold text-xs">
                               ¥{formatNumber(itemTotal)}
                             </td>
                           </tr>
@@ -235,12 +235,14 @@ export const SampleSheet2: React.FC<SampleSheet2Props> = ({
 
                     {/* Bottom Summary: 頁小計は不要、最終頁の内訳合計（税抜）のみ表示 */}
                     {isLastPage && (
-                      <tr className="border-t-2 border-black bg-slate-100 font-bold">
-                        <td colSpan={3} className="border-r border-black py-2 px-4 text-right">
+                      <tr className="border-t-2 border-black font-bold">
+                        <td className="border-r border-black py-2"></td>
+                        <td className="border-l border-black border-r border-black py-2 px-3 text-right">
                           内訳合計（税抜）
                         </td>
-                        <td className="border-r border-black py-2"></td>
-                        <td className="py-2 text-right font-mono pr-2 text-xs">
+                        <td className="border-l border-black border-r border-black py-2"></td>
+                        <td className="border-l border-black border-r border-black py-2"></td>
+                        <td className="border-l border-black py-2 text-right font-mono pr-2 text-xs">
                           ¥{formatNumber(grandTotal)}
                         </td>
                       </tr>

@@ -23,6 +23,17 @@ export const SampleSheet1: React.FC<SampleSheet1Props> = ({
   const formatNumber = (val: number) => val.toLocaleString();
   const cleanTel = (header.tel || '').replace(/^Tel\s*/i, '').trim();
 
+  // Precise height calculation to ensure table vertical borders extend all the way to the bottom border seamlessly
+  const rowHeight = 26; // h-6.5
+  const theadHeight = 34;
+  const subheaderHeight = 38;
+  const summaryHeight = 78; // 3 summary rows * 26
+  const endMarkerHeight = 40; // h-10 for '以上' row
+  const usedHeight = theadHeight + subheaderHeight + (items.length * rowHeight) + summaryHeight + endMarkerHeight;
+  const tableTargetHeight = 620;
+  const remainingHeight = Math.max(30, tableTargetHeight - usedHeight);
+  const tableContainerHeight = Math.max(tableTargetHeight, usedHeight + remainingHeight);
+
   const sheetContent = (
     <div
       id={`${idPrefix}estimate-page-1`}
@@ -162,28 +173,31 @@ export const SampleSheet1: React.FC<SampleSheet1Props> = ({
         </div>
 
         {/* 3. Main Items Table (項目 | 件名 | 単価 | 数量 | 金額) matching image.png */}
-        <div className="border-2 border-black flex-1 flex flex-col mt-2 min-h-[620px]">
+        <div
+          className="border-2 border-black flex-1 flex flex-col mt-2 overflow-hidden"
+          style={{ minHeight: `${tableContainerHeight}px`, height: `${tableContainerHeight}px` }}
+        >
           <table className="w-full h-full border-collapse text-[11px] flex-1">
             <thead>
-              <tr className="border-b-2 border-black text-center font-medium bg-gray-50/20">
+              <tr className="border-b-2 border-black text-center font-medium">
                 <th className="border-r border-black py-1.5 w-14 shrink-0 whitespace-nowrap text-center">項目</th>
-                <th className="border-r border-black py-1.5 px-3 min-w-[260px] text-center whitespace-nowrap">件　　　　　　名</th>
-                <th className="border-r border-black py-1.5 w-24 shrink-0 whitespace-nowrap text-center">単　　価</th>
-                <th className="border-r border-black py-1.5 w-20 shrink-0 whitespace-nowrap text-center">数　量</th>
-                <th className="py-1.5 w-32 shrink-0 whitespace-nowrap text-center">金　　額</th>
+                <th className="border-l border-black border-r border-black py-1.5 px-3 min-w-[260px] text-center whitespace-nowrap">件　　　　　　名</th>
+                <th className="border-l border-black border-r border-black py-1.5 w-24 shrink-0 whitespace-nowrap text-center">単　　価</th>
+                <th className="border-l border-black border-r border-black py-1.5 w-20 shrink-0 whitespace-nowrap text-center">数　量</th>
+                <th className="border-l border-black py-1.5 w-32 shrink-0 whitespace-nowrap text-center">金　　額</th>
               </tr>
             </thead>
             <tbody>
               {/* Subheader: 案件分類 / 作業件名 */}
               <tr>
                 <td className="border-r border-black py-1"></td>
-                <td className="border-r border-black py-1 px-3">
+                <td className="border-l border-black border-r border-black py-1 px-3">
                   <div className="font-semibold">{header.projectCategory ?? '本案件内訳'}</div>
                   <div className="pl-4 font-medium">{header.projectSubject ?? '昇降機機能維持修理'}</div>
                 </td>
-                <td className="border-r border-black py-1"></td>
-                <td className="border-r border-black py-1"></td>
-                <td className="py-1"></td>
+                <td className="border-l border-black border-r border-black py-1"></td>
+                <td className="border-l border-black border-r border-black py-1"></td>
+                <td className="border-l border-black py-1"></td>
               </tr>
 
               {/* List of Main Items:
@@ -194,14 +208,14 @@ export const SampleSheet1: React.FC<SampleSheet1Props> = ({
                   <td className="border-r border-black py-0.5 text-center font-mono whitespace-nowrap">
                     {idx + 1}.
                   </td>
-                  <td className="border-r border-black py-0.5 px-3 font-medium whitespace-nowrap">
+                  <td className="border-l border-black border-r border-black py-0.5 px-3 font-medium whitespace-nowrap">
                     {item.title}
                   </td>
-                  <td className="border-r border-black py-0.5"></td>
-                  <td className="border-r border-black border-b border-black py-0.5 text-center font-mono whitespace-nowrap">
+                  <td className="border-l border-black border-r border-black py-0.5"></td>
+                  <td className="border-l border-black border-r border-black border-b border-black py-0.5 text-center font-mono whitespace-nowrap">
                     {item.quantity} {item.unit}
                   </td>
-                  <td className="border-b border-black py-0.5 text-right font-mono pr-3 font-medium whitespace-nowrap">
+                  <td className="border-l border-black border-b border-black py-0.5 text-right font-mono pr-3 font-medium whitespace-nowrap">
                     {formatNumber(item.amount)}
                   </td>
                 </tr>
@@ -210,57 +224,57 @@ export const SampleSheet1: React.FC<SampleSheet1Props> = ({
               {/* Summary Rows directly below item 9 */}
               <tr className="h-6.5">
                 <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black border-b border-black py-0.5 px-2 text-center font-medium">
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black border-b border-black py-0.5 px-2 text-center font-medium">
                   合　　計
                 </td>
-                <td className="border-b border-black py-0.5 text-right font-mono pr-3 font-medium">
+                <td className="border-l border-black border-b border-black py-0.5 text-right font-mono pr-3 font-medium">
                   {formatNumber(subtotal)}
                 </td>
               </tr>
 
               <tr className="h-6.5">
                 <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black border-b border-black py-0.5 px-2 text-center font-medium">
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black border-b border-black py-0.5 px-2 text-center font-medium">
                   消費税額
                 </td>
-                <td className="border-b border-black py-0.5 text-right font-mono pr-3 font-medium">
+                <td className="border-l border-black border-b border-black py-0.5 text-right font-mono pr-3 font-medium">
                   {formatNumber(taxAmount)}
                 </td>
               </tr>
 
               <tr className="h-6.5">
                 <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black border-b border-black py-0.5 px-2 text-center font-bold">
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black border-b border-black py-0.5 px-2 text-center font-bold">
                   総　　計
                 </td>
-                <td className="border-b border-black py-0.5 text-right font-mono pr-3 font-bold">
+                <td className="border-l border-black border-b border-black py-0.5 text-right font-mono pr-3 font-bold">
                   ¥{formatNumber(grandTotal)}
                 </td>
               </tr>
 
               <tr className="h-10">
                 <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="py-2 text-center tracking-[1em] font-medium text-xs">
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black border-r border-black"></td>
+                <td className="border-l border-black py-2 text-center tracking-[1em] font-medium text-xs">
                   以　　上
                 </td>
               </tr>
 
               {/* Remaining space extending down to the bottom border of the table */}
-              <tr className="h-full">
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td className="border-r border-black"></td>
-                <td></td>
+              <tr style={{ height: `${remainingHeight}px` }}>
+                <td className="border-r border-black" style={{ height: `${remainingHeight}px` }}>&nbsp;</td>
+                <td className="border-l border-black border-r border-black" style={{ height: `${remainingHeight}px` }}>&nbsp;</td>
+                <td className="border-l border-black border-r border-black" style={{ height: `${remainingHeight}px` }}>&nbsp;</td>
+                <td className="border-l border-black border-r border-black" style={{ height: `${remainingHeight}px` }}>&nbsp;</td>
+                <td className="border-l border-black" style={{ height: `${remainingHeight}px` }}>&nbsp;</td>
               </tr>
             </tbody>
           </table>

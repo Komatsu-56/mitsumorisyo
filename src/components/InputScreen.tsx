@@ -12,7 +12,6 @@ import {
   ArrowUp,
   ArrowDown,
   Copy,
-  Printer,
   FileText,
   ListOrdered,
   Layers,
@@ -47,7 +46,7 @@ interface InputScreenProps {
   setItems: React.Dispatch<React.SetStateAction<EstimateItem[]>>;
   onGoToPreview: (mode: ViewMode) => void;
   onExportPdf: () => void;
-  onPrint: () => void;
+  onPrint?: () => void;
   isGeneratingPdf?: boolean;
 }
 
@@ -1340,13 +1339,6 @@ export const InputScreen: React.FC<InputScreenProps> = ({
                 >
                   <FileDown className="w-4 h-4" />
                   {isGeneratingPdf ? 'PDF生成中...' : '高精細PDFダウンロード'}
-                </button>
-                <button
-                  onClick={onPrint}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-slate-800 bg-slate-200 hover:bg-slate-300 rounded-lg transition-colors shadow-xs cursor-pointer"
-                >
-                  <Printer className="w-3.5 h-3.5" />
-                  印刷
                 </button>
               </div>
             </div>
