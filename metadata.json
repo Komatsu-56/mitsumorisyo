@@ -1,0 +1,8 @@
+{
+  "name": "Remix 見積作成・原価4行展開一元生成システム",
+  "description": "「見積作成」ワンクリックで原価計算・内訳明細（4行展開）・見積表紙を一元生成し、A4高精細PDF印刷およびERP・基幹システム用JSON/CSV/TSVデータを即時出力する統合見積ワークフロー。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

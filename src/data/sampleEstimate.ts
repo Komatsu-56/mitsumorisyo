@@ -1,0 +1,221 @@
+import { EstimateHeaderData, EstimateItem } from '../types/estimate';
+import { createEstimateItem } from '../utils/estimateCalculations';
+
+export const INITIAL_HEADER_DATA: EstimateHeaderData = {
+  customerName: 'XX XX 様',
+  dateYear: '20XX',
+  dateMonth: 'X',
+  dateDay: 'X',
+  estimateNumber: 'XXXXXX 第 13-001-01 号',
+
+  referenceDateInfo: '　年　月　日付　第　号',
+  greetingLine1: 'ご照会に対し下記のとおりお見積申し上げます、',
+  greetingLine2: '何卒ご用命賜りますようお願い申し上げます、',
+
+  deliveryPlace: '貴XXXX内',
+  deliveryPeriod: 'お打ち合わせの上',
+  constructionTerms: '土・日・祝日を除く平日昼間施工',
+  validityPeriod: '発行日より3ヶ月',
+  paymentTerms: '工事完了後現金でお支払い願います',
+
+  postalCode: '〒260-0015',
+  address1: '千葉県XX市XX区XX２－３－１',
+  address2: '(XXX千葉ビル内)',
+  tel: 'XXX-XXX-XXXX',
+  companyName: 'ｘｘｘｘｘｘｘｘｘｘ株式会社',
+  branchName: 'ｘｘｘ支店',
+  representativeTitle: '営業課長',
+  representativeName: 'XX XX',
+
+  stamp1Title: '',
+  stamp2Title: '',
+  stamp3Title: '担当',
+
+  projectCategory: '本案件内訳',
+  projectSubject: '昇降機機能維持修理',
+
+  taxRate: 0.10,
+};
+
+export const INITIAL_ITEMS: EstimateItem[] = [
+  createEstimateItem({
+    id: 'item-1',
+    itemNumber: 1,
+    title: 'ブレーキ組立取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-1-1',
+        name: '電磁ブレーキコイル組立',
+        quantity: 2,
+        unit: '個',
+        unitPrice: 131000,
+        amount: 262000,
+      },
+      {
+        id: 'mat-1-2',
+        name: 'ブレーキシューライニング組',
+        quantity: 2,
+        unit: '組',
+        unitPrice: 40000,
+        amount: 80000,
+      },
+    ],
+    replacementLaborAmount: 106000,
+    overrideTotalAmount: 540000,
+  }),
+  createEstimateItem({
+    id: 'item-2',
+    itemNumber: 2,
+    title: '巻上機ギヤオイル取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-2-1',
+        name: 'エレベーターオイル (NO. 61)',
+        quantity: 1,
+        unit: '缶',
+        unitPrice: 6100,
+        amount: 6100,
+      },
+    ],
+    replacementLaborAmount: 46000,
+    overrideTotalAmount: 65000,
+  }),
+  createEstimateItem({
+    id: 'item-3',
+    itemNumber: 3,
+    title: 'カゴドア連動 (STS) ベルト取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-3-1',
+        name: 'STSタイミングベルト組立',
+        quantity: 1,
+        unit: '組',
+        unitPrice: 30000,
+        amount: 30000,
+      },
+    ],
+    replacementLaborAmount: 30000,
+    overrideTotalAmount: 76000,
+  }),
+  createEstimateItem({
+    id: 'item-4',
+    itemNumber: 4,
+    title: 'STSプーリ組立取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-4-1',
+        name: '従動プーリ組立',
+        quantity: 1,
+        unit: '個',
+        unitPrice: 29000,
+        amount: 29000,
+      },
+    ],
+    replacementLaborAmount: 16000,
+    overrideTotalAmount: 56000,
+  }),
+  createEstimateItem({
+    id: 'item-5',
+    itemNumber: 5,
+    title: 'ドアマシンモーター取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-5-1',
+        name: 'モータ組立',
+        quantity: 1,
+        unit: '個',
+        unitPrice: 176000,
+        amount: 176000,
+      },
+    ],
+    replacementLaborAmount: 37400,
+    overrideTotalAmount: 260000,
+  }),
+  createEstimateItem({
+    id: 'item-6',
+    itemNumber: 6,
+    title: '巻上ロープ取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-6-1',
+        name: '主索ロープ (12mm×5本組)',
+        quantity: 1,
+        unit: '組',
+        unitPrice: 320000,
+        amount: 320000,
+      },
+    ],
+    replacementLaborAmount: 210000,
+    overrideTotalAmount: 672000,
+  }),
+  createEstimateItem({
+    id: 'item-7',
+    itemNumber: 7,
+    title: '制御盤内基板取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-7-1',
+        name: 'メイン制御プリント基板',
+        quantity: 1,
+        unit: '枚',
+        unitPrice: 680000,
+        amount: 680000,
+      },
+    ],
+    replacementLaborAmount: 140000,
+    overrideTotalAmount: 978000,
+  }),
+  createEstimateItem({
+    id: 'item-8',
+    itemNumber: 8,
+    title: '停電時自動着床装置バッテリー取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-8-1',
+        name: '密閉型蓄電池パック (24V)',
+        quantity: 1,
+        unit: '組',
+        unitPrice: 58000,
+        amount: 58000,
+      },
+    ],
+    replacementLaborAmount: 25000,
+    overrideTotalAmount: 95000,
+  }),
+  createEstimateItem({
+    id: 'item-9',
+    itemNumber: 9,
+    title: 'かご上ステーション内基板取替',
+    quantity: 1,
+    unit: '式',
+    materials: [
+      {
+        id: 'mat-9-1',
+        name: 'かご上リレーユニット基板',
+        quantity: 1,
+        unit: '枚',
+        unitPrice: 110000,
+        amount: 110000,
+      },
+    ],
+    replacementLaborAmount: 35000,
+    overrideTotalAmount: 168000,
+  }),
+];
+
